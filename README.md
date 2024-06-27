@@ -2,7 +2,7 @@
 
 ## Overview
 
-Email-AI is a tool that automates the process of reading, categorizing, and responding to emails in Google and Outlook accounts based on the context using AI. The tool leverages BullMQ for task scheduling and OpenAI for context understanding and automated replies. The tool is built using TypeScript and Next.js.
+Email-AI is a tool that automates the process of reading, categorizing, and responding to emails in Google and Outlook accounts based on the context using AI. The tool leverages BullMQ for task scheduling and Gemini AI for context understanding and automated replies. The tool is built using TypeScript and Next.js.
 
 ## Features
 
