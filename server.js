@@ -2,12 +2,12 @@ import { getLatestEmails, getEmailsFromQueue, checkNewEmails } from "./src/servi
 import { authorize } from "./src/services/gmail-services/googleApi.js";
 
 export const auth = await authorize();
-console.log("auth apikey: ", auth._clientSecret);
+console.log("auth apikey: ".brightMagenta.bold, auth._clientSecret);
 
 export async function main() {
     try {
        
-        console.log("Starting Gmail Automation");
+        console.log("Starting Gmail Automation".cyan.bold);
         const latestEmails = await getLatestEmails(auth, 3);
         console.log("Latest emails: ".bgGreen.white, latestEmails);
 
@@ -21,13 +21,13 @@ export async function main() {
                 const newEmails = await checkNewEmails(auth);
                 console.log("New emails: ", newEmails);
             } catch (error) {
-                console.error("Error checking new emails: ", error);
+                console.error("Error checking new emails: ".red.bold, error);
             }finally{
                 val = val + 20;
             }
         }, 20000);
     } catch (error) {
-        console.error("Error in main function: ", error);
+        console.error("Error in main function: ".red.bold, error);
     }
 }
 

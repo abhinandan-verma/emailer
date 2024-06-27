@@ -64,10 +64,12 @@ async function sendEmail(auth, to, subject, body) {
     const email = emailLines.join('\r\n').trim();
     const base64EncodedEmail = Buffer.from(email).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
+    const beautifiedEmail = util.inspect(email, { showHidden: false, depth: null, colors: true });  
+
     const res = await gmail.users.messages.send({
         userId: 'me',
         requestBody: {
-            raw: base64EncodedEmail,
+            raw: beautifiedEmail,
         }
     }).then(() => {
         //,mark the email as processed
