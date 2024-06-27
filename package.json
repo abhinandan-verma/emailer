@@ -2,11 +2,13 @@
   "name": "emailer",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gmail": "node src/services/gmail-services/googleApi.js"
   },
   "dependencies": {
     "react": "^18",
