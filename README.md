@@ -102,10 +102,13 @@ ntials
 ### Project Structure
 
 - `src/`: Contains the source code
-  - `oauth/`: OAuth setup for Gmail and Outlook
-  - `tasks/`: BullMQ task definitions and schedulers
-  - `controllers/`: Email handling and processing logic
-  - `utils/`: Utility functions
+  - `app/`: App to make frontend
+  - `credentilas/`: OAuth setup for Gmail and Outlook
+  - `lib/`: utitlty function
+  - `services/`: All the servies of  gmail
+    - `gmail-services`: all the services of gmail
+    - `outlook-services`: All the services of outlook email
+   
 
 ### Key Components
 
