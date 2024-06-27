@@ -7,7 +7,7 @@ dotenv.config();
 const apiKey = process.env.GEMINI_API_KEY;
 
 while (!apiKey || apiKey === "") {
-    console.log("API Key not found");
+    console.log("API Key not found".bgBrightRed.bold);
 }
 
 const gemini = new GoogleGenerativeAI(apiKey);
@@ -19,16 +19,17 @@ const geminiModel = gemini.getGenerativeModel({
 async function categorizeEmail(emailBody) {
 
     if (!emailBody || emailBody === "") {
+        console.log("Email body is empty".bgBrightRed.bold)
         return "NULL";
     }
 
     try {
         
         const result = await geminiModel.generateContent(
-            `Categorize the following email content:\n\n"${emailBody}"\n\nCategory: Interested, Not-Interested, More information, Neutral`
+            `Categorize the following email content:\n\n"${emailBody}"\n\nCategory: Interested, Not-Interested, More information, Neutral`.bgBrightCyan.italic
         )
         const response = result.response.text()
-        console.log("Response: ", response);
+        console.log("Response: ", response.bgBrightGreen.bold);
         
         if (response.includes("Not-Interested")) {
             return "NOT INTERESTED";
@@ -41,7 +42,7 @@ async function categorizeEmail(emailBody) {
         }
 
     } catch (error) {
-        console.log("Error: ", error);
+        console.log("Error: ".bgBrightRed.bold, error);
         return "NULL";
     }
 }
@@ -49,6 +50,7 @@ async function categorizeEmail(emailBody) {
 async function generateResponseEmail(category, content, sender) {
 
     if (!category || !content) {
+        console.log("Category or content is empty".bgBrightRed.bold)
         return "No response generated";
     }
     
@@ -68,17 +70,17 @@ async function generateResponseEmail(category, content, sender) {
             break;
     }
 
-    console.log("Prompt: ", prompt)
+    console.log("Prompt: ".bgBrightMagenta.italic, prompt)
 
     const response = (await geminiModel.generateContent(prompt)).response.text();
 
-    console.log("Response: ", response);
+    console.log("Response: ".bgBrightGreen.italic, response);
 
     if (response) {
         return response;
     }
 
-    return "No response generated";
+    return "No response generated".bgBrightRed.bold;
 }
 
  
