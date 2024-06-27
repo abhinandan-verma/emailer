@@ -4,8 +4,6 @@ import path from 'path'
 import process from 'process'
 import { authenticate } from '@google-cloud/local-auth'
 import { promises as fsPromises } from 'fs';
-import { exec } from 'child_process';
-import http from 'http';
 
 
 const SCOPES = [
@@ -22,10 +20,10 @@ const SCOPES = [
 // Fetch and store token from file
 const TOKEN_PATH = path.join(process.cwd(), './src/credentials/token.json');
 
-const CREDENTIALS_PATH = path.join(process.cwd(), './src/credentials/credentials.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), './src/credentials/credentials.json')
+
 
 // Read previously authorized  credentials from file
-
 async function loadSavedCredentials() {
     try {
         await fsPromises.access(TOKEN_PATH, fs.constants.F_OK);
@@ -47,6 +45,11 @@ async function loadSavedCredentials() {
 async function saveCredentials(client) {
     try {
         const content = await fsPromises.readFile(CREDENTIALS_PATH, 'utf8'); // Added 'utf8' to directly get a string
+        if (!content || content.length === 0 || content.trim() === '' || content === null) {
+            console.log('Error loading client secret file:', error);
+            process.exit(1);
+        }
+
         const keys = JSON.parse(content);
 
         const key = keys.web || keys.installed;
